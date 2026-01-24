@@ -48,7 +48,7 @@ plt.show()
 #转化成张量
 x = torch.from_numpy(x).float()
 y = torch.from_numpy(y).float()
-
+'''
 #Moduel
 class moduel_net(nn.Module):
     def __init__(self, num_input,num_hidden,num_output):
@@ -88,6 +88,7 @@ def plot_moduel(x):
 
 plot_decision_boudnary(lambda x : plot_moduel(x),x.numpy(),y.numpy())
 plt.show()
+'''
 '''
 #sequential 直接代替w1 b1 w2 b2
 seq_set  = nn.Sequential(
