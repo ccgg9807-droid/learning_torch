@@ -49,6 +49,46 @@ plt.show()
 x = torch.from_numpy(x).float()
 y = torch.from_numpy(y).float()
 
+#Moduel
+class moduel_net(nn.Module):
+    def __init__(self, num_input,num_hidden,num_output):
+        super(moduel_net,self).__init__()
+        self.layer1 = nn.Linear(num_input,num_hidden)
+
+        self.layer2 = nn.Tanh()
+
+        self.layer3 = nn.Linear(num_hidden,num_output)
+
+    def forward(self,x):
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        return x
+
+mo_net = moduel_net(2,4,1)
+
+optimizer = torch.optim.SGD(mo_net.parameters(),lr=1.)
+
+criterion = nn.BCEWithLogitsLoss()
+
+for e in range(1000):
+    y_ = mo_net(Variable(x))
+    loss = criterion(y_,Variable(y))
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    if((e+1)%1000 ==0):
+        print("epoch : {} loss : {}".format(e+1,loss.data))
+
+def plot_moduel(x):
+    out = mo_net(Variable(torch.from_numpy(x).float()))
+    out = F.sigmoid(out).data.numpy()
+    out =(out > 0.5)*1
+    return out
+
+plot_decision_boudnary(lambda x : plot_moduel(x),x.numpy(),y.numpy())
+plt.show()
+'''
 #sequential 直接代替w1 b1 w2 b2
 seq_set  = nn.Sequential(
     nn.Linear(2,4),
@@ -79,7 +119,7 @@ plot_decision_boudnary(lambda x:plot_sequential(x),x.numpy(),y.numpy())
 plt.show()
 
 
-
+'''
 '''
 #多层神经网络
 w1 = nn.Parameter(torch.randn(2,4)*0.01)
