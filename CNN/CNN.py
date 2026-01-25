@@ -10,7 +10,7 @@ import torch
 from PIL import Image
 
 
-im = Image.open('/home/cg/learning_torch/神经网络/cat/cat.png').convert('L')
+im = Image.open('/home/cg/learning_torch/CNN/cat/cat.png').convert('L')
 #数据类型一般是uint8 不便于矩阵计算
 im = np.array(im,dtype= 'float32')
 print(im.shape)
