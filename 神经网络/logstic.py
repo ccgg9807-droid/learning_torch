@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import torch.nn.functional as F
 from torch import nn
 #数据路径输入
-with open('/home/cg/深度学习/神经网络/data.txt','r') as f:
+with open('/home/cg/learning_torch/神经网络/data.txt','r') as f:
     datalist = [ i.split('\n')[0].split(',') for i in f.readlines()]
     data = [(float(i[0]),float(i[1]),float(i[2])) for i in datalist]
 
@@ -29,7 +29,7 @@ np.data = np.array(data,dtype= 'float32')
 x_data = torch.from_numpy(np.data[:,0:2])
 #标签|y|=1
 y_data = torch.from_numpy(np.data[:,-1]).unsqueeze(1)
-
+''''
 #转化成varible
 x_data = Variable(x_data)
 y_data = Variable(y_data)
@@ -64,9 +64,9 @@ for e in range(1000):
         print("epoch : {} loss : {}".format(e+1,loss.data,acc))
 during = time.time()-start
 
-
-
 '''
+
+
 #权重w和b
 w = Variable(torch.randn(2,1),requires_grad= True)
 b = Variable(torch.zeros(1),requires_grad= True)
@@ -92,8 +92,10 @@ plt.show()
 def binary_loss(y_,y_data):
     logits = torch.mean((y_data * y_.clamp(1e-12).log() + (1 - y_data) * (1 - y_).clamp(1e-12).log() )) #clamp函数为了保证损失值始终有一个保底的正数下限不至于出现梯度消失 的现象
     return -logits
-
+print(x_data.shape)
+print(y_data.shape)
 y_ = logstic_regression(x_data)
+print(y_.shape)
 loss = binary_loss(y_,y_data)
 print(loss)
 
@@ -131,5 +133,4 @@ plt.plot(plot_x0,plot_y0,'bo',label = 'x0')
 plt.plot(plot_x1,plot_y1,'ro',label = 'x1')
 plt.legend()
 plt.show()
-'''
 

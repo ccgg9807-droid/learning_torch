@@ -22,8 +22,8 @@ plt.imshow(a_data, cmap='gray')
 plt.show()
 '''
 a_data = np.array(a_data,dtype='float32')
-#print(a_data)
-#print(a_data.shape)
+print(a_data)
+print(a_data.shape)
 
 def data_tf(x):
     x = np.array(x,dtype='float32')/255

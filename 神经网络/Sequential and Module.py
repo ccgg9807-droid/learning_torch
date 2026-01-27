@@ -160,28 +160,8 @@ plot_decision_boudnary(lambda x:plot_twonetwork(x),x.numpy(),y.numpy())
 plt.show()
 
 '''
-'''
+
 #logistic 方法 
-np.random.seed(1)
-m = 400 
-N = int(m/2)
-D = 2
-x = np.zeros((m,D))
-y = np.zeros((m,1),dtype= 'uint8')
-a = 4
-
-for j in range(2):
-    ix = range(N * j, N * (j+1))
-    t = np.linspace(j * 3.12,(j+1) * 3.12,N ) + np.random.randn(N) * 0.2
-    r = a * np.sin(4 * t) +np.random.randn(N) * 0.2
-    x[ix] = np.c_[r * np.sin(t),r * np.cos(t)]
-    y[ix] = j
-
-plt.scatter(x[:, 0], x[:, 1], c=y.reshape(-1), s=40, cmap=plt.cm.Spectral)
-plt.show()
-
-
-
 w = nn.Parameter(torch.randn(2,1))
 b = nn.Parameter(torch.zeros(1))
 
@@ -209,4 +189,4 @@ def plot_logistic(x):
     return  out.data.numpy()
 
 plot_decision_boudnary(lambda x:plot_logistic(x),x.numpy(),y.numpy())
-'''
+plt.show()
